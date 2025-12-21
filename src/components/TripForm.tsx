@@ -3,7 +3,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TripParams } from "@/lib/types";
-import { MapPin, Calendar, DollarSign, Users, Heart } from "lucide-react";
+import {
+  MapPin,
+  Calendar,
+  DollarSign,
+  Users,
+  Heart,
+  Loader2,
+} from "lucide-react";
 
 interface TripFormProps {
   onSubmit: (data: TripParams) => void;
@@ -218,7 +225,10 @@ export function TripForm({ onSubmit, isLoading }: TripFormProps) {
                 className="flex-1 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold disabled:opacity-50 flex justify-center items-center gap-2"
               >
                 {isLoading ? (
-                  <span className="animate-spin text-xl">Creating...</span>
+                  <>
+                    <Loader2 className="w-6 h-6 animate-spin" />
+                    <span className="text-xl">Creating...</span>
+                  </>
                 ) : (
                   "Create Plan"
                 )}
