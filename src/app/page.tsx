@@ -11,7 +11,10 @@ import { Plane, Map as MapIcon } from "lucide-react";
 export default function Home() {
   const [itinerary, setItinerary] = useState<Itinerary | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [logs, setLogs] = useState<string[]>([]);
+  // Store structured logs with stable timestamps
+  const [logs, setLogs] = useState<{ message: string; timestamp: string }[]>(
+    []
+  );
 
   const handlePlanTrip = async (params: TripParams) => {
     setIsLoading(true);
@@ -19,7 +22,12 @@ export default function Home() {
     setLogs([]);
 
     // Simulate Agent "Thought Process"
-    const addLog = (msg: string) => setLogs((prev) => [...prev, msg]);
+    const addLog = (msg: string) => {
+      setLogs((prev) => [
+        ...prev,
+        { message: msg, timestamp: new Date().toLocaleTimeString() },
+      ]);
+    };
 
     try {
       addLog("Initializing Travel Agent...");

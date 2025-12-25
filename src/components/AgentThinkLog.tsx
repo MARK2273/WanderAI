@@ -4,8 +4,13 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Terminal } from "lucide-react";
 
+interface LogEntry {
+  message: string;
+  timestamp: string;
+}
+
 interface AgentThinkLogProps {
-  logs: string[];
+  logs: LogEntry[];
 }
 
 export function AgentThinkLog({ logs }: AgentThinkLogProps) {
@@ -29,10 +34,8 @@ export function AgentThinkLog({ logs }: AgentThinkLogProps) {
             animate={{ opacity: 1, x: 0 }}
             className="text-green-400 break-words"
           >
-            <span className="text-gray-500 mr-2">
-              [{new Date().toLocaleTimeString()}]
-            </span>
-            {log}
+            <span className="text-gray-500 mr-2">[{log.timestamp}]</span>
+            {log.message}
           </motion.div>
         ))}
         {logs.length > 0 && (
